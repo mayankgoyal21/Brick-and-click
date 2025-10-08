@@ -10,12 +10,9 @@ dotenv.config();
 
 mongoose
   .connect(process.env.MONGO)
-  .then(() => {
-    console.log('Connected to MongoDB!');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  .then(() => console.log('Connected to MongoDB!'))
+  .catch((err) => console.log(err));
+
 
   const __dirname = path.resolve();
 
@@ -25,8 +22,9 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}!`);
 });
 
 app.use('/api/user', userRouter);
